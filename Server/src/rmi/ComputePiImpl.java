@@ -10,7 +10,6 @@ public class ComputePiImpl extends UnicastRemoteObject implements ComputePiRemot
 	public ComputePiImpl() throws RemoteException {
 		super();
 	}
-	
 
 	@Override
 	public int computePi(int gesamtZahl) throws RemoteException {
@@ -28,7 +27,6 @@ public class ComputePiImpl extends UnicastRemoteObject implements ComputePiRemot
 				tropfenViertelkreis=tropfenViertelkreis+1;
 			}
 		}
-		//System.out.printf("Tropfen: " + gesamtZahl + ", davon Tropfen im Viertelkreis: " + tropfenViertelkreis);
 		return tropfenViertelkreis;
 	}
 }
