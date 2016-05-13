@@ -18,7 +18,7 @@ public class ComputePiClient {
 			int gesamtZahl=11000;
 			int tropfenViertelkreis = computePiRemote.computePi(gesamtZahl);
 			BigDecimal pi = new BigDecimal(4 * (double) tropfenViertelkreis/gesamtZahl);
-			System.out.println("Tropfen: " + gesamtZahl + ", davon Tropfen im Viertelkreis: " + tropfenViertelkreis + " Pi: " +pi); 
+			System.out.println("Tropfen: "+gesamtZahl+", davon Tropfen im Viertelkreis: "+tropfenViertelkreis+"."+"\nDie Naeherung fuer Pi: "+pi); 
 		} catch (Exception e) {
 			System.err.println("ComputePiClient exception: " + e.getMessage());
 			e.printStackTrace();
