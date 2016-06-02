@@ -11,22 +11,21 @@ public class ComputePiClient {
             System.setSecurityManager(new SecurityManager());
 		}*/
 		
-		// Number of Servers
-		int server = Integer.parseInt(args[0]);
-		String name = "//" + args[server] + "/ComputePi";
 		
 		try {	
-			/* Create Registry.
-			LocateRegistry.getRegistry() sends invocations to the registry on server's local host on the default registry port of 1099*/
-			Registry myRegistry = LocateRegistry.getRegistry();
-			ComputePiRemote computePiRemote = (ComputePiRemote) myRegistry.lookup(name);
-			
+			// Number of Servers (First Argument)
+			int server = Integer.parseInt(args[0]);
+			// Number of "tropfenZahl" (First Argument after Servers IP's)
 			int tropfenZahl= Integer.parseInt(args[server+1]);
 			int tropfenViertelkreis = 0;
 			
 			for(int i = 0 ; i < server; i++)
             { 
-                //Calculate tropfenViertelkreis
+				String name = "//" + args[1+i] + "/ComputePi";
+				Registry myRegistry = LocateRegistry.getRegistry();
+				ComputePiRemote computePiRemote = (ComputePiRemote) myRegistry.lookup(name);
+				
+				//Calculate tropfenViertelkreis
                 tropfenViertelkreis = computePiRemote.computePi(tropfenZahl);
 
                 System.out.println("Server " + (i + 1) + " hat "  + tropfenViertelkreis + " Treffer.");
