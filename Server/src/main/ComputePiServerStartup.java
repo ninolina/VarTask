@@ -24,7 +24,6 @@ public class ComputePiServerStartup {
 			}
 			
 			// create Server
-			//ComputePiImpl computePiServer = new ComputePiImpl();
 			Naming.rebind(name, new ComputePiImpl());
 			System.out.println("ComputePiServer ist bereit!"); 
 			

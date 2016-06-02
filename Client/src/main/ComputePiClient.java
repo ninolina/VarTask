@@ -13,7 +13,7 @@ public class ComputePiClient {
 		}*/
 		try {	
 			
-			Registry myRegistry = LocateRegistry.getRegistry("localhost", 1099);
+			Registry myRegistry = LocateRegistry.getRegistry("localhost");
 			ComputePiRemote computePiRemote = (ComputePiRemote) myRegistry.lookup("ComputePi");
 			// Number of Servers
 			int server = Integer.parseInt(args[0]);
@@ -22,8 +22,6 @@ public class ComputePiClient {
 			
 			for(int i = 0 ; i < server; i++)
             {
-                String name = "//" + args[server-i] + "/ComputePiRemote";
-   
                 //Calculate tropfenZahl pro Server
                 int gesamtZahlServer = tropfenZahl / server;
                 
