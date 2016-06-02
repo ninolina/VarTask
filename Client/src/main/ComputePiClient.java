@@ -15,12 +15,11 @@ public class ComputePiClient {
 		try {	
 			// Number of Servers (First Argument)
 			int server = Integer.parseInt(args[0]);
-			// Number of "tropfenZahl" (First Argument after Servers IP's)
+			// Number of "tropfenZahl" (First Argument after Servers IP)
 			int tropfenZahl= Integer.parseInt(args[server+1]);
 			int tropfenViertelkreis = 0;
 			
-			for(int i = 0 ; i < server; i++)
-            { 
+			for(int i = 0 ; i < server; i++){ 
 				String name = "//" + args[1+i] + "/ComputePi";
 				Registry myRegistry = LocateRegistry.getRegistry();
 				ComputePiRemote computePiRemote = (ComputePiRemote) myRegistry.lookup(name);
