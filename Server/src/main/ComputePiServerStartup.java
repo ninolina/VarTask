@@ -13,21 +13,24 @@ public class ComputePiServerStartup {
 		/*if (System.getSecurityManager() == null) {
             System.setSecurityManager(new SecurityManager());
 		}*/
+		String name = "//" + args[0] + "/ComputePi";
 		
-		int port = 1099;
 		try {
-			// create on port 1099
-			Registry registry = LocateRegistry.createRegistry(port);
-			// create a new service named ComputePi
-			registry.rebind("ComputePi", new ComputePiImpl());
-			System.out.println("ComputePiServer (re)bound on port: " + port); 
+			try { 
+				// create registry
+				LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
+			} catch (Exception e) {
+				System.out.println("Registry ist nicht erstellt!");
+			}
+			
+			// create Server
+			//ComputePiImpl computePiServer = new ComputePiImpl();
+			Naming.rebind(name, new ComputePiImpl());
+			System.out.println("ComputePiServer ist bereit!"); 
 			
 		} catch (Exception e) {
 			System.err.println("ComputePiServer exception: " + e.getMessage());
 			e.printStackTrace();
 		}
-		
-		System.out.println("Server ist bereit!"); 
 	}
-
 }

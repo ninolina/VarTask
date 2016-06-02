@@ -1,6 +1,5 @@
 package rmi;
 
-import java.math.*;
 import java.rmi.*;
 import java.rmi.server.*;
 
@@ -12,14 +11,14 @@ public class ComputePiImpl extends UnicastRemoteObject implements ComputePiRemot
 	}
 
 	@Override
-	public int computePi(int gesamtZahl) throws RemoteException {
+	public int computePi(int tropfenZahl) throws RemoteException {
 		// Tropfen im Viertelkreis
 		int tropfenViertelkreis=0;
 		// Koordinaten des Punktes P
 		double x;
 		double y;
 				
-		for(int i = 0; i < gesamtZahl; i++) {
+		for(int i = 0; i < tropfenZahl; i++) {
 			x = Math.random();
 			y = Math.random();
 					
