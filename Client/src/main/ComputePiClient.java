@@ -10,34 +10,31 @@ public class ComputePiClient {
 		/*if (System.getSecurityManager() == null) {
             System.setSecurityManager(new SecurityManager());
 		}*/
+		
+		// Number of Servers
+		int server = Integer.parseInt(args[0]);
+		String name = "//" + args[server] + "/ComputePi";
+		
 		try {	
-			/*create Registry.
-			LocateRegistry.getRegistry sends invocations to the registry on server's local host on the default registry port of 1099*/
+			/* Create Registry.
+			LocateRegistry.getRegistry() sends invocations to the registry on server's local host on the default registry port of 1099*/
 			Registry myRegistry = LocateRegistry.getRegistry();
-			ComputePiRemote computePiRemote = (ComputePiRemote) myRegistry.lookup("ComputePi");
+			ComputePiRemote computePiRemote = (ComputePiRemote) myRegistry.lookup(name);
 			
-			// Number of Servers
-			int server = Integer.parseInt(args[0]);
 			int tropfenZahl= Integer.parseInt(args[server+1]);
 			int tropfenViertelkreis = 0;
 			
 			for(int i = 0 ; i < server; i++)
-            {
-                //Calculate tropfenZahl per Server
-                int gesamtZahlServer = tropfenZahl / server;
-                
+            { 
                 //Calculate tropfenViertelkreis
-                tropfenViertelkreis = computePiRemote.computePi(gesamtZahlServer) + tropfenViertelkreis;
+                tropfenViertelkreis = computePiRemote.computePi(tropfenZahl);
 
-                System.out.println("Server " + (i + 1) + " Anzahl Treffer: "  + tropfenViertelkreis);
-
-                if (i == (server -1) ){
-                    BigDecimal pi = new BigDecimal(4*(double) tropfenViertelkreis/tropfenZahl);
-                    System.out.println("Tropfen: "+tropfenZahl+", davon Tropfen im Viertelkreis: "+tropfenViertelkreis+"."+"\nDie Naeherung fuer Pi: "+pi);
-                    break;
-                }
-
+                System.out.println("Server " + (i + 1) + " hat "  + tropfenViertelkreis + " Treffer.");
             }
+              
+            BigDecimal pi = new BigDecimal(4*(double) tropfenViertelkreis/tropfenZahl);
+            System.out.println("Tropfenanzahl: "+tropfenZahl+", Tropfen im Viertelkreis aller Server: "+tropfenViertelkreis+"."+"\nDie Naeherung fuer Pi: "+pi);
+            
 		} catch (Exception e) {
 			System.err.println("ComputePiClient exception: " + e.getMessage());
 			e.printStackTrace();
