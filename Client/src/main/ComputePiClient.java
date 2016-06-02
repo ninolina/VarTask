@@ -1,5 +1,4 @@
 package main;
-import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.math.*;
@@ -12,9 +11,11 @@ public class ComputePiClient {
             System.setSecurityManager(new SecurityManager());
 		}*/
 		try {	
-			
-			Registry myRegistry = LocateRegistry.getRegistry("localhost");
+			/*create Registry.
+			LocateRegistry.getRegistry sends invocations to the registry on server's local host on the default registry port of 1099*/
+			Registry myRegistry = LocateRegistry.getRegistry();
 			ComputePiRemote computePiRemote = (ComputePiRemote) myRegistry.lookup("ComputePi");
+			
 			// Number of Servers
 			int server = Integer.parseInt(args[0]);
 			int tropfenZahl= Integer.parseInt(args[server+1]);
@@ -22,7 +23,7 @@ public class ComputePiClient {
 			
 			for(int i = 0 ; i < server; i++)
             {
-                //Calculate tropfenZahl pro Server
+                //Calculate tropfenZahl per Server
                 int gesamtZahlServer = tropfenZahl / server;
                 
                 //Calculate tropfenViertelkreis
