@@ -8,10 +8,10 @@ import rmi.ComputePiRemote;
 public class ComputePiClient {
 
 	public static void main(String[] args) {
-		/*
-		 * if (System.getSecurityManager() == null) {
-		 * System.setSecurityManager(new SecurityManager()); }
-		 */
+		
+		 if (System.getSecurityManager() == null) {
+		 System.setSecurityManager(new SecurityManager()); }
+		 
 
 		try {
 			// Number of Servers (First Argument)
